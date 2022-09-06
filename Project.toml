@@ -1,0 +1,13 @@
+name = "TIPSBP1"
+uuid = "306b66af-f4eb-453c-84d1-3907e2f1bc47"
+authors = ["kori smyser"]
+version = "0.1.0"
+
+[compat]
+julia = "1"
+
+[extras]
+Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
+
+[targets]
+test = ["Test"]
