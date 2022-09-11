@@ -39,4 +39,3 @@ fig = polarplot(dimer,Populations(M=+1));
 display(fig)
 fig = polarplot(dimer,Populations(M=+2));
 display(fig)
-

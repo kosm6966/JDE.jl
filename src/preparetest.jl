@@ -24,11 +24,8 @@ TestData
         A = DelimitedFiles.readdlm(datapath, '\t')
         x = A[:,1]
         prompt = A[:,2]
-        prompt ./= maximum(abs.(prompt))
         residual = A[:,4]
-        residual ./= maximum(abs.(residual))
         hankel = A[:,3] + A[:,4]
-        hankel ./= maximum(abs.(hankel))
         new(prompt,hankel,residual,x)
     end
 end 
