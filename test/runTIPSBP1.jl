@@ -1,14 +1,14 @@
 using TIPSBP1
 using Plots
 
-##Export to text files in ./Data/ folder
-TIPSBP1.figure2()
+##Export to text files in ./Data/ folder. Function creates folder if it doesn't exist.
+TIPSBP1.figure2(1330.,28.,0.)
 TIPSBP1.figure3a()
 TIPSBP1.figure3de()
 
 
 ##This was the old code that generates figures
-test,experiment,dimer = initializetest()
+test,experiment,dimer = initializetest(1330.,28.,0.)
 
 #Figure 2a
 S = quintetspectrum(dimer,Spectrum(basis=:Adiabatic),experiment);
