@@ -1,6 +1,6 @@
 # TIPSBP1.jl
 [![DOI](https://zenodo.org/badge/539056584.svg)](https://zenodo.org/badge/latestdoi/539056584)
-[LICENSE](https://github.com/kosm6966/TIPSBP1.jl/blob/main/LICENSE)
+[![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
 The **TIPSBP1.jl** software written in [Julia](https://julialang.org) numerically calculates the EPR spectrum from transitions between sublevels of the coupled triplet pair quintet state from parallel and bridged TIPS-BP1'-like dimers that undergo singlet fission. The code was written with an emphasis on clarity to be useful to scientists of various backgrounds and customizable for various dimer systems. Though some routines employed here are naive, the population calculations are a distinctive feature of this software. See (DOI: XXXXXX) for a complete explanation of our underlying theory. Features include:
 
