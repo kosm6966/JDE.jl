@@ -60,7 +60,7 @@ function anisotensor!(X,dimer)
 end
 
 """
-    aniso!(H0,R,Tmp3,Tmp9,DA,DB,X,SA,SB,fθ,fϕ) 
+    aniso!(H0,R,Tmp3,Tmp9,DA,DB,X,SA,SB,θ,ϕ) 
 
 Computes the anisotropic interaction hamiltonian `H0 = HA + HB + HX` for a given orientation `(θ,ϕ)` with respect to the field.
 

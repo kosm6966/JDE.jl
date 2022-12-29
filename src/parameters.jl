@@ -2,9 +2,9 @@
 
     Polarization()
 
-    Polarization is a structure that is sent to the `polarplot()` function to calculate a 
-plot of the polarization of the quintet state (`plottype = :Polarization`), as a function of
-the dimer's orientation with respect to the field.
+Polarization is a structure that is sent to the `polarplot()` function to calculate a 
+plot of the polarization of the quintet state, as a function of the dimer's orientation 
+with respect to the field.
 
 # Examples
 ```julia-repl
@@ -17,9 +17,9 @@ julia> pp = Polarization();
 
     Populations(M::Int64)
 
-    Populations is a structure that is sent to the `polarplot()` function to calculate a 
-plot of the populations for the specified M-sublevel (`plottype = :Populations`), as a function of
-the dimer's orientation with respect to the field.
+Populations is a structure that is sent to the `polarplot()` function to calculate a 
+plot of the populations for the specified M-sublevel, as a function of the dimer's 
+orientation with respect to the field.
 
 # Examples
 ```julia-repl
@@ -41,7 +41,7 @@ struct Adiabatic a::Bool end
     Spectrum(nOutput::Int64,fwhm::Float64,line::Symbol,basis::Symbol)
 
 Spectrum is a structure that is sent to the `quintetspectrum()` function to calculate  
-the quintet spectrum in the diabatic basis. 
+the quintet spectrum. 
 
 `nOutput::Int64` specifies whether the output of the function `S` is the total quintet spectrum (`1`); 
 is separated into two spectra (`2`), `S(|M|) = [1↔2, 0↔1]`; or is seperated into four 
@@ -107,22 +107,27 @@ end
     field::Vector{Float64},ν::Float64`)
 
 Experiment is a structure that is sent to the `quintetspectrum()` function to calculate  
-the quintet powder spectrum. The default call to `quintetspectrum()` uses the values
-nOctants and nPoints to calculate nPoints random rotations, projected on a nOctants of 
-a sphere. The default likewise uses the values b0_left, b0_right, and nField to 
-generate a vector of field points over which the spectrum is calculated.
+the quintet powder spectrum. Choose from three options for specifying orientations: (1) Give 
+the filename to read in from file, (2) give equal length vectors for single-crystal spectra,
+(3) Generate random distribution of 
 
 `distribution::String` gives the path and filename to the orientation distribution of a 
 powder spectrum. The file is comma separated and has the header `theta,phi,weight`. The
-angles are given in degree.
+angles are given in degree. See example file in test/testdata. (Option 1)
 
-`θ::{Float64,Vector{Float64}}` gives the values of theta in degrees. Alternate to reading from file.
+`θ::{Float64,Vector{Float64}}` gives the values of theta in degrees. (Option 2)
 
-`ϕ::{Float64,Vector{Float64}}` gives the values of phi in degrees. Alternate to reading from file.
+`ϕ::{Float64,Vector{Float64}}` gives the values of phi in degrees. (Option 2)
 
-`w::{Float64,Vector{Float64}}` gives the weights. Alternate to reading from file.
+`nOctants::Int64` gives the number of octants to include in random distribution of rotations. 
+(Option 3)
 
-`field::Vector{Float64}` gives the field values.
+`nPoints::Int64` gives the number of rotations to include in random distribution. To ensure
+enough points are used, check for convergence! (Option 3)
+
+`w::{Float64,Vector{Float64}}` gives the weights.
+
+`field::Vector{Float64}` gives the field values. 
 
 `ν::Float64` gives the microwave excitation frequency in GHz.
 
@@ -132,6 +137,15 @@ passes the field points as a vector called `b0vec`:
 ```julia-repl
 julia> experiment = Experiment(distribution="/path/to/filename.txt",field=b0vec);
 ```
+To calculate a powder spectrum where the nPoints orientations are chosen at random from 
+nOctants (1, 2, or 4) of a sphere:
+```julia-repl
+julia> experiment = Experiment(nOctants=4,nPoints=5000,field=b0vec);
+```
+To calculate the spectrum for B||z:
+    ```julia-repl
+    julia> experiment = Experiment(θ=[0.],ϕ=[0.],field=b0vec)
+    ```
 To calculate the spectrum for B||z, B||x, and B||y:
 ```julia-repl
 julia> experiment = Experiment(θ=[0.,90.,90.],ϕ=[0.,0.,90.],field=b0vec)
@@ -139,25 +153,32 @@ julia> experiment = Experiment(θ=[0.,90.,90.],ϕ=[0.,0.,90.],field=b0vec)
 """
 @with_kw struct Experiment 
     # Experiment parameters
+    nOctants::Int64 = 2 # 1, 2, 4
+    nPoints::Int64 = 5000
     distribution = true
     θ = true
     ϕ = true
     w = true
+
     field = true
 
     ν::Float64 = 9.7310     # excitation frequency, GHz
 
-    function Experiment(distribution,θ,ϕ,w,field,ν)
+    function Experiment(nOctants,nPoints,distribution,θ,ϕ,w,field,ν)
         if typeof(distribution) == String
             powder = CSV.read(distribution, DataFrames.DataFrame)
             θ = powder.theta
             ϕ = powder.phi
             w = (powder.weight ./maximum(powder.weight))
+        elseif θ == true && distribution == true
+            θ = rad2deg.(acos.(rand(nPoints)))
+            ϕ = rand(nPoints)*nOctants*90.
+            w = ones(Float64,nPoints)
         elseif length(w) != length(θ)
             w = ones(Float64,length(θ))
         end
-        ν = ν*1000
-        new(distribution,θ,ϕ,w,field,ν)
+        ν = ν*1000.
+        new(nOctants,nPoints,distribution,θ,ϕ,w,field,ν)
     end
 end
 
@@ -182,6 +203,13 @@ anisotropic interaction in degree.
 
 `Φ::Float64` gives the angle `Φ` (capital phi) that defines the inter-chromophore 
 anisotropic interaction in degree.
+
+`g::Float64` gives the unitless g-tensor. Can be used when fitting to shift center, 
+e.g., from shielding effects. 
+
+`J::Float64` gives the isotropic inter-chromophore exhange interaction in MHz. 
+Note: We only reccomend using this program when J is large, i.e., there are no crossing 
+in the oberved field range. Also, the Weber plots may require J < 0. 
 
 # Examples
 ```julia-repl

@@ -43,6 +43,10 @@ function quintethamiltonian(dimer,exp,basis)
 
         ## Add the zeeman field to the full hamiltonian 
         enfield(En,H,H0,S,b0,basis)
+        
+        # H is the full hamiltonian where
+        #   S increases across columns and down rows, ex: s = 0,  1, 1, 1,  2,  2, 2, 2, 2
+        #   M increases across columns and down rows, ex: m = 0, -1, 0, 1, -2, -1, 0, 1, 2
 
         ## Compute the resonances and intensities
         findRes!(index,dE,En,Signal,b0,exp,i)
