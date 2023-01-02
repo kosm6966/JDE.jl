@@ -19,14 +19,20 @@ TestData
     hankel = zeros(Float64,1)
     residual = zeros(Float64,1)
     x = zeros(Float64,1)
-    function TestData(prompt,hankel,residual,x)
+    aspect_ratio::Float64 = 1.
+    function TestData(prompt,hankel,residual,x,aspect_ratio)
         datapath = "./test/testdata/Peak Normed - Residual.txt"
         A = DelimitedFiles.readdlm(datapath, '\t')
         x = A[:,1]
         prompt = A[:,2]
         residual = A[:,4]
-        hankel = A[:,3] + A[:,4]
-        new(prompt,hankel,residual,x)
+        hankel = A[:,3]
+
+        h=16.251
+        w=48.838
+        aspect_ratio = h/w/(2/abs(x[end]-x[1]))
+
+        new(prompt,hankel,residual,x,aspect_ratio)
     end
 end 
 

@@ -12,14 +12,15 @@ plot(test.x,test.prompt);
 plot!(test.x,S1*0.8,label="Prompt")
 
 #Figure 2b/2c
-S2 = quintetspectrum(dimer,Spectrum(nOutput=2),Experiment(distribution="./test/testdata/powder_distribution.csv",field=test.x));
+S2 = quintetspectrum(dimer,Spectrum(basis=:Diabatic,nOutput=2),Experiment(distribution="./test/testdata/powder_distribution.csv",field=test.x));
 plot(test.x,test.hankel,label="Hankel");
 plot!(test.x,S2[:,2]*0.8,label="⁵TT₀↔⁵TT₁")
+
 plot(test.x,test.residual,label="Residual");
 plot!(test.x,S2[:,1]*0.8,label="⁵TT₁↔⁵TT₂")
 
 #Figure 3a
-fig1, fig2, fig3 = weberplot(dimer,Spectrum(nOutput=2,multiOut=true),Experiment(θ=[0.,90.,90.],ϕ=[0.,0.,90.],field=test.x))
+fig1, fig2, fig3 = weberplot(dimer,Spectrum(basis=:Diabatic,nOutput=2,multiOut=true),Experiment(θ=[0.,90.,90.],ϕ=[0.,0.,90.],field=test.x))
 display(fig1)
 display(fig2)
 display(fig3)
