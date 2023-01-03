@@ -26,7 +26,7 @@ operating system](https://julialang.org/downloads/platform/). The following usag
 ## Usage
 Download the package and all contents. Then, open a terminal and run the package from the cloned directory:
 ```bash
-git clone git@github.com:kosm6966/JDE.git
+git clone git@github.com:joeleaves/JDE.git
 cd JDE
 julia --project=@. -e 'import Pkg; Pkg.instantiate()' # Install JDE's dependencies
 julia -e 'import Pkg; Pkg.add(["Plots", "PyPlot"])' # Install postprocessing tools
@@ -85,7 +85,7 @@ In addition, you can refer to the JDE software directly as
   author={Smyser, Kori E. and Eaves, Joel D.},
   year={2022},
   month={10},
-  howpublished={\url{https://github.com/kosm6966/JDE}},
+  howpublished={\url{https://github.com/joeleaves/JDE}},
   doi={10.5281/zenodo.7464138}
 }
 ```
