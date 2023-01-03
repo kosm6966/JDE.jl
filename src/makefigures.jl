@@ -183,7 +183,7 @@ function figure3de(D=1322.,X=59.,beta=111.)
     polarplot(dimer,Polarization())
     ϕ=[0.:0.5:360.;]
     θ=[LinRange( 0., 90., Int(floor(0.5*(length(ϕ)+1))));]
-    Populations = TIPSBP1.calculatepopdist(dimer,θ,ϕ)
+    Populations = JDE.calculatepopdist(dimer,θ,ϕ)
     fn(M) = string("Figure3e_",M-3)
     mkpath("data/")
     for ii = 1:5
