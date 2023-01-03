@@ -10,7 +10,7 @@ The **JDE.jl** software written in [Julia](https://julialang.org) numerically ca
   * Calculate intensities from the hamiltonian based on the JDE model.
   * Calculate single-orientation spectra.
   * Calculate the spectrum from a glassy sample whose orientation distribution is given in an input file or generate a random distribution for specified quadrants.
-  * Vary spectroscopic parameters `g`, `J`, `D`, `E`, `β`, `X`, `Θ`, `Φ` (see XXXX). For parallel dimers, set the bridging angle, `β = 180`.
+  * Vary spectroscopic parameters `g`, `J`, `D`, `E`, `β`, `X`, `Θ`, `Φ`. For parallel dimers, set the bridging angle, `β = 180`.
 
 * Calculate populations for the triplet pair from singlet fission using the JDE model.
 
