@@ -1,8 +1,8 @@
 # JDE.jl
-[![DOI](https://zenodo.org/badge/539056584.svg)](https://zenodo.org/badge/latestdoi/539056584)
+[![DOI](https://zenodo.org/badge/539056584.svg)](https://zenodo.org/badge/latestdoi/539056584)# JDE.jl
 [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
-The **JDE.jl** software written in [Julia](https://julialang.org) numerically calculates the EPR spectrum from transitions between sublevels of the coupled triplet pair quintet state from parallel and bridged TIPS-BP1'-like dimers that undergo singlet fission. The code was written with an emphasis on clarity to be useful to scientists of various backgrounds and customizable for various dimer systems. The population calculations are a distinctive feature of this software. See (DOI: XXXXXX) for a complete explanation of our underlying theory. Features include:
+The **JDE.jl** software written in [Julia](https://julialang.org) numerically calculates the EPR spectrum from transitions between sublevels of the coupled triplet pair quintet state from parallel and bridged TIPS-BP1'-like dimers that undergo singlet fission. The code was written with an emphasis on clarity to be useful to scientists of various backgrounds and customizable for various dimer systems. The population calculations are a distinctive feature of this software. See [here](https://doi.org/10.1038/s41467-023-36529-6) for a complete explanation of our underlying theory. Features include:
 
 * Compute the EPR spectrum for the triplet pair from singlet fission.
   * Calculate the full TT hamiltonian using the diabatic or adiabatic basis.
@@ -48,7 +48,7 @@ help?> JDE
 julia --project=@. test/SAtest.jl
 ```
 
-SAtest.jl provides an example of how to fit parameters using simulated annealing. TIPSBP1test-data.jl and TIPSBP1test-figs.jl generate the data and figures published in the paper (DOI: XXXXXX). To run an interactive script use the flag,
+SAtest.jl provides an example of how to fit parameters using simulated annealing. TIPSBP1test-data.jl and TIPSBP1test-figs.jl generate the data and figures published in the corresponding paper. To run an interactive script use the flag,
 ```bash
 julia -i --project=@. test/TIPSBP1test-figs.jl
 ```
@@ -66,21 +66,22 @@ julia> figure3de(1280.,0.,0.)
 ## Referencing
 If you use the JDE software in your own research or write a paper using results obtained with the help of the JDE software, please cite the following article:
 ```bibtex
-@article{dill2022,
-  title={Entangled Spin-polarized Excitons from Singlet Fission in a Rigid Dimer},
-  author={Dill, Ryan D. and Smyser, Kori E. and Rugg, Brandon K. and Damrauer, Niels H. and Eaves, Joel D.},
+@article{
+  title={Entangled spin-polarized excitons from singlet fission in a rigid dimer},
+  author={Dill, Ryan D and Smyser, Kori E and Rugg, Brandon K and Damrauer, Niels H and Eaves, Joel D},
   journal={Nature Communications},
-  volume={X},
-  number={X},
-  pages={XX},
-  year={2022},
-  doi={10.XXXX}
+  volume={14},
+  number={1},
+  pages={1180},
+  year={2023},
+  publisher={Nature Publishing Group UK London},
+  doi={10.1038/s41467-023-36529-6}
 }
 ```
 
 In addition, you can refer to the JDE software directly as
 ```bibtex
-@misc{smyser2022,
+@misc{
   title={JDE.jl: A nonadiabatic transition theory for the triplet pair from singlet fission},
   author={Smyser, Kori E. and Eaves, Joel D.},
   year={2022},
